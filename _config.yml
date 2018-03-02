@@ -1,20 +1,20 @@
 # Site settings
 title: 鸿
-SEOTitle: 鸿
+SEOTitle: 鸿 | O
 header-img: img/home-bg.jpg
 email: 332313547@qq.com
-description: "鸿"
-keyword: "鸿"
-url: "http://hong.pope"              # your host, for absolute URL
-baseurl: "/blog"         # for example, '/blog' if your blog hosted on 'host/blog'
+description: "就为了好玩吧，也许以后还可以写点东西呢？"
+keyword: "鸿 blog 开发"
+#url: "http://hong.pope"              # your host, for absolute URL
+#baseurl: "/blog"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
 #weibo_username:     None
-zhihu_username:     None
-github_username:    HongCJ
+zhihu_username:     hong1109
+github_username:    hongCJ
 #twitter_username:  None
 #facebook_username:  NOne
 
@@ -50,9 +50,9 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: 鸿
+#duoshuo_username: 鸿
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -68,8 +68,8 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "学习学习。"
-sidebar-avatar: img/avatar-hong.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "学点技术，看看足球，看点漫画，看点日漫。这样！"
+sidebar-avatar: /img/avatar-hong.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -82,7 +82,7 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "M e",
+        title: "Me",
         href: "none"
     }
 ]
