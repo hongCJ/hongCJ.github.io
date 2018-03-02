@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>鸿</title>
+    <description>鸿</description>
+    <link>http://localhost:4000/blog/</link>
+    <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 02 Mar 2018 15:21:14 +0800</pubDate>
+    <lastBuildDate>Fri, 02 Mar 2018 15:21:14 +0800</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>build my git blog</title>
+        <description>&lt;p&gt;试着搭建一个blog&lt;/p&gt;
+</description>
+        <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2018/03/01/blog-build/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2018/03/01/blog-build/</guid>
+        
+        <category>Blog</category>
+        
+        <category>Github</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
