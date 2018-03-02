@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: 332313547@qq.com
 description: "就为了好玩吧，也许以后还可以写点东西呢？"
 keyword: "鸿 blog 开发"
-#url: "http://hong.pope"              # your host, for absolute URL
+url: "https://hongcj.github.io"              # your host, for absolute URL
 #baseurl: "/blog"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
