@@ -5,13 +5,22 @@
     <description>就为了好玩吧，也许以后还可以写点东西呢？</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 02 Mar 2018 16:30:44 +0800</pubDate>
-    <lastBuildDate>Fri, 02 Mar 2018 16:30:44 +0800</lastBuildDate>
+    <pubDate>Fri, 02 Mar 2018 16:53:38 +0800</pubDate>
+    <lastBuildDate>Fri, 02 Mar 2018 16:53:38 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
         <title>build my git blog</title>
-        <description>&lt;p&gt;试着搭建一个blog&lt;/p&gt;
+        <description>&lt;p&gt;试着写一些东西&lt;br /&gt;
+虽然写不出来&lt;br /&gt;
+但是&lt;br /&gt;
+以后的事情&lt;br /&gt;
+谁知道呢&lt;br /&gt;
+也许开始了&lt;br /&gt;
+以后就好办了&lt;br /&gt;
+所以啊&lt;br /&gt;
+我还是要试一下&lt;/p&gt;
+
 </description>
         <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2018/03/01/blog-build/</link>
