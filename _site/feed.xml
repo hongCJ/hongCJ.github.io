@@ -5,9 +5,89 @@
     <description>就为了好玩吧，也许以后还可以写点东西呢？</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 03 Mar 2018 15:19:11 +0800</pubDate>
-    <lastBuildDate>Sat, 03 Mar 2018 15:19:11 +0800</lastBuildDate>
+    <pubDate>Sat, 09 Jun 2018 14:49:37 +0800</pubDate>
+    <lastBuildDate>Sat, 09 Jun 2018 14:49:37 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>JS通过Promise调用OC方法</title>
+        <description>&lt;p&gt;###Javascript调用OC使用Promise&lt;/p&gt;
+
+&lt;p&gt;JavaScript代码&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!function(w){
+	class i_handler {
+		constructor (s,f) {
+			this.success = s
+			this.fail = f
+		}
+	}
+    class iOS {
+        constructor () {
+            this.calls = new Map();
+        }
+        native (val) {
+        	if (typeof val !== 'object') {
+        		return
+        	}
+        	let key = val.identifier; 
+        	if (typeof key === 'string' &amp;amp;&amp;amp; this.calls.has(key)) {
+        		let c = this.calls.get(key);
+        		let successfull = val.successfull;
+        		if (successfull) {
+        			c.success(val.data);
+        		} else {
+        			c.fail(val.data); 
+        		}
+        		this.calls.delete(key);
+        	}
+        }
+        emmit (method,paramater) {
+            return new Promise(function(resoleve,reject) {
+            	if (typeof method !== 'string' || method.length === 0) {
+            		reject('方法名不能为空')
+            		return;
+            	}
+            	let date = new Date();
+            	let identifier = method + date.toDateString()
+            	let msg = {
+            		handler:method,
+            		parameter:paramater,
+            		identifier:identifier,
+            	}
+            	let c = new i_handler(resoleve,reject);
+            	ios.calls.set(identifier,c)
+            	window.webkit.messageHandlers.iOS.postMessage(msg);
+            })
+        }
+    }
+    if (!Reflect.has(w,'ios')) {
+    	w.ios = new iOS();
+    }
+}(window)
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;使用&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ios.emmit('method',{}).then(function(val) {
+
+}).catch(functhon(error) {
+
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;水平有限，请指教&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 25 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/</guid>
+        
+        <category>OC</category>
+        
+        
+      </item>
     
       <item>
         <title>build my git blog</title>

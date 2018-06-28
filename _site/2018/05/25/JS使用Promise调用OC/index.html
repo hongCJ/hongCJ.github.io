@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>鸿 | O</title>
+    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/404.html">
+    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -123,23 +123,219 @@
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/404-bg.jpg')">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="site-heading" id="tag-heading">
-					<h1>404</h1>
-					<span class="subheading">你来到了没有知识的荒原 :(</span>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        
+                    </div>
+                    <h1>JS通过Promise调用OC方法</h1>
+                    
+                    
+                    <h2 class="subheading">使用wkWebView</h2>
+                    
+                    <span class="meta">Posted by Hong on May 25, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<p>###Javascript调用OC使用Promise</p>
+
+<p>JavaScript代码</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
+	class i_handler {
+		constructor (s,f) {
+			this.success = s
+			this.fail = f
+		}
+	}
+    class iOS {
+        constructor () {
+            this.calls = new Map();
+        }
+        native (val) {
+        	if (typeof val !== 'object') {
+        		return
+        	}
+        	let key = val.identifier; 
+        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
+        		let c = this.calls.get(key);
+        		let successfull = val.successfull;
+        		if (successfull) {
+        			c.success(val.data);
+        		} else {
+        			c.fail(val.data); 
+        		}
+        		this.calls.delete(key);
+        	}
+        }
+        emmit (method,paramater) {
+            return new Promise(function(resoleve,reject) {
+            	if (typeof method !== 'string' || method.length === 0) {
+            		reject('方法名不能为空')
+            		return;
+            	}
+            	let date = new Date();
+            	let identifier = method + date.toDateString()
+            	let msg = {
+            		handler:method,
+            		parameter:paramater,
+            		identifier:identifier,
+            	}
+            	let c = new i_handler(resoleve,reject);
+            	ios.calls.set(identifier,c)
+            	window.webkit.messageHandlers.iOS.postMessage(msg);
+            })
+        }
+    }
+    if (!Reflect.has(w,'ios')) {
+    	w.ios = new iOS();
+    }
+}(window)
+
+
+</code></pre></div></div>
+<p>使用</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
+
+}).catch(functhon(error) {
+
+})
+</code></pre></div></div>
+
+<p>水平有限，请指教</p>
+
+
+
+                <hr>
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- 标签 -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>朋友</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="none">Me</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
 <script>
-	document.body.classList.add('page-fullscreen');
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
 </script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

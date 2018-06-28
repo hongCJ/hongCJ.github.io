@@ -15,6 +15,7 @@ RSS: false
 #weibo_username:     None
 zhihu_username:     hong1109
 github_username:    hongCJ
+jianshu_username:   Loving_1109
 #twitter_username:  None
 #facebook_username:  NOne
 
@@ -73,5 +74,9 @@ friends: [
     {
         title: "Me",
         href: "none"
+    },
+    {
+        title: "简书",
+        href: "https://www.jianshu.com/u/81d97c6823cf"
     }
 ]
