@@ -3,7 +3,7 @@ layout:     post
 title:      "JS通过Promise调用OC方法"
 subtitle:   "使用wkWebView"
 date:       2018-05-25
-author:     "Hong"
+author:     "鸿"
 header-img: "img/home-bg.jpg"
 tags:
     - OC

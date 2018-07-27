@@ -3,7 +3,7 @@ layout:     post
 title:      "build my git blog"
 subtitle:   "try build a blog"
 date:       2018-03-01
-author:     "Hong"
+author:     "鸿"
 header-img: "img/home-bg.jpg"
 tags:
     - Blog

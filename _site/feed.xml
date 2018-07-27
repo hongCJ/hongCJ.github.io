@@ -5,9 +5,29 @@
     <description>就为了好玩吧，也许以后还可以写点东西呢？</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 09 Jun 2018 14:49:37 +0800</pubDate>
-    <lastBuildDate>Sat, 09 Jun 2018 14:49:37 +0800</lastBuildDate>
+    <pubDate>Fri, 27 Jul 2018 14:22:33 +0800</pubDate>
+    <lastBuildDate>Fri, 27 Jul 2018 14:22:33 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>开始读书、写作</title>
+        <description>&lt;p&gt;从现在开始，读书和写作&lt;/p&gt;
+
+&lt;p&gt;读什么？随便读读&lt;/p&gt;
+
+&lt;p&gt;写什么？随便写写&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 27 Jul 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/</guid>
+        
+        <category>读书</category>
+        
+        <category>写作</category>
+        
+        
+      </item>
     
       <item>
         <title>JS通过Promise调用OC方法</title>

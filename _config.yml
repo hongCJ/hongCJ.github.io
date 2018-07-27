@@ -58,14 +58,14 @@ kramdown:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "学点技术，看看足球，看点漫画，看点日漫。这样！"
+sidebar-about-description: "学点技术，看看足球，看点漫画，看看书。这样！"
 sidebar-avatar: /img/avatar-hong.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
 # 标签
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
 
 
 
@@ -80,3 +80,6 @@ friends: [
         href: "https://www.jianshu.com/u/81d97c6823cf"
     }
 ]
+
+
+#jekyll serve --watch 

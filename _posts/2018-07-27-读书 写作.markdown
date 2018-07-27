@@ -3,17 +3,18 @@ layout:     post
 title:      "开始读书、写作"
 subtitle:   "读和写"
 date:       2018-07-27
-author:     "Hong"
+author:     "鸿"
 header-img: "img/home-bg.jpg"
 tags:
-    - 读书、写作
+    - 读书
+    - 写作
 ---
 
 从现在开始，读书和写作
 
-读什么？随便读读  
+读什么？随便读读
+  
 写什么？随便写写
-
 
 
 
