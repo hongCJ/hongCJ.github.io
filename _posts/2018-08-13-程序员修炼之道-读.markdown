@@ -2,7 +2,7 @@
 layout:     post
 title:      "读 程序员修炼之道的一点感悟"
 subtitle:   "读书"
-date:       2018-05-25
+date:       2018-08-13
 author:     "鸿"
 header-img: "img/home-bg.jpg"
 tags:
