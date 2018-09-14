@@ -1,0 +1,62 @@
+---
+layout:     post
+title:      "应该学习下shell"
+subtitle:   "shell"
+date:       2018-09-14
+author:     "鸿"
+header-img: "img/home-bg.jpg"
+tags:
+    - Blog
+---
+
+
+应该学点shell，可以让自己方便好多。
+
+以前看别人用terminal完成各种工作，写各种命令就觉得好牛逼。原以为那是玩Linux才会的东西，但是Mac用起来也很爽。
+
+原以为shell是一个很复杂的东西，学习来很难。但是，当自己去看看的时候就发现，如果只是做些简单的工作，还是很简单的。虽然确实有很多的东西很难，而我发现自己确实很菜。
+
+因为每天打开电脑都需要启动很多的程序，以前都是一个一个的去点，最近学了点shell，就想干嘛不写个脚本。发现，只需要一点shell的皮毛就可以完成了。
+
+```
+work() {
+  /usr/bin/open -a "/Applications/Google Chrome.app" 'https://feedly.com/i/my'
+  /usr/bin/open 'http://work.com'
+  /usr/bin/open "/Applications/Mail.app"
+  /usr/bin/open "/Applications/MotionPro.app"
+  j main; /usr/bin/open work.project
+  cd ..
+  sh podUp.sh
+}
+
+```
+
+只需一个work命令，就可以了。
+
+在文章也是一样的
+
+```
+write() {
+  if [ -z $1 ]
+  then
+  echo "文件名不能为空"
+  exit 0
+  fi
+  cd "xxxx.github.io"
+  now=`date "+%Y-%m-%d"`
+  fileName="${now}-$1.markdown"
+  cp "demo.markdown" "./_posts/$fileName"
+  cd _posts
+  sed -i '' "s/T/$1/" $fileName
+  sed -i '' "s/D/$now/" $fileName
+  open -a "MacDown" $fileName
+}
+```
+
+只需一个write 命令 就可以按照格式创建好模版 和打开
+
+虽然我shell写的比较烂，各种命令不熟悉，还是觉得好牛逼
+
+ 
+
+
