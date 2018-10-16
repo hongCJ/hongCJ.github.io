@@ -1,0 +1,89 @@
+---
+layout:     post
+title:      "用python查找未使用的文件"
+subtitle:   "python 未使用"
+date:       2018-10-16
+author:     "鸿"
+header-img: "img/home-bg.jpg"
+tags:
+    - python3
+---
+
+
+项目开发久了就会存在很多不再使用的文件，太多了实在是占用资源，一个一个清理又太麻烦，所以，试着写个python练练手。
+
+我对python3不熟悉，代码写的不咋地，这个就是练手而已。
+
+思路比较简单  
+
+1. 找到项目中的所有图片文件
+2. 遍历所有的代码文件，一个一个文件去找，看是否存在
+
+```python3
+import os
+import sys
+///iOS项目
+///需要查找的文件夹
+if len(sys.argv) < 2:
+    exit()
+directory = sys.argv[1]
+
+///通过地址获取文件名
+def getNameWithLocation(location):
+    if location is None:
+        return ""
+    if ".bundle" in location:
+        return ""///忽略bundle文件
+    index = 1
+    if ".xcassets" in location:
+        index = 2
+    fileNameWithExtension = location.split("/")[-index]
+    fileNameWithOutExtension = fileNameWithExtension.split(".")[0]
+    if "@" in fileNameWithOutExtension:
+        fileNameWithOutExtension = fileNameWithOutExtension.split("@")[0] 
+    return '\"' + fileNameWithOutExtension + '\"'
+
+commonImageFiles = os.popen('find ./%s  -name "*.png" -o -name "*.jpg" -o -name "*.gif"' % (directory)).read().split('\n')
+///查找所有png,jpg,gif 文件
+
+imageNameLocationDic = {}
+imageUsedDic = {}
+for location in commonImageFiles:
+    name = getNameWithLocation(location)
+    if name == "":
+        continue
+    imageNameLocationDic[name] = location
+    imageUsedDic[name] = 0
+
+swiftFiles = os.popen('find ./%s -name \"*.swift\"' % (directory)).read().split('\n') 
+ocFiles = os.popen('find ./%s -name \"*.h\" -o -name \"*.m\"' % (directory)).read().split('\n') 
+xibFiles = os.popen('find ./%s -name \"*.xib\" -o -name \"*.storyboard\"' % (directory)).read().split('\n') 
+allFiles = swiftFiles + ocFiles + xibFiles
+
+for file in allFiles:
+    if len(file) == 0:
+        continue
+    imageNames = list(imageNameLocationDic.keys())
+    with open(file, encoding='utf-8') as f:
+        text = f.read()
+        if text is not None:
+            for name in imageNames:
+                if imageUsedDic[name] is 1:
+                    continue
+                if name in text:
+                    imageUsedDic[name] = 1
+                    continue 
+        
+
+with open("unused.txt", 'w', encoding='utf-8') as f:
+    for (k, v) in imageUsedDic.items():
+        if v != 1:
+            f.write(imageNameLocationDic[k])
+            f.write('\n')
+
+exit()
+
+
+```
+
+
