@@ -33,29 +33,50 @@ work() {
 
 只需一个work命令，就可以了。
 
-在文章也是一样的
+写文章也是一样的
 
 ```
 write() {
-  if [ -z $1 ]
-  then
-  echo "文件名不能为空"
-  exit 0
-  fi
-  cd "xxxx.github.io"
-  now=`date "+%Y-%m-%d"`
-  fileName="${now}-$1.markdown"
-  cp "demo.markdown" "./_posts/$fileName"
-  cd _posts
-  sed -i '' "s/T/$1/" $fileName
-  sed -i '' "s/D/$now/" $fileName
-  open -a "MacDown" $fileName
+  cd "***.github.io"
+allFiles=`ls _posts`
+fileArray=(${allFiles// / })
+index=0
+choices=()
+for v in ${fileArray[@]}
+do
+    if [[ $v == *$1* ]]; then
+    echo $index.$v
+    choices[$index]=$v
+    let index++
+    fi
+done
+
+fileName=""
+
+if [ $index -gt 0 ];then
+    echo ${index}".新建"
+    read input
+    if [ $input -lt $index -a $input -ge 0 ];then
+        open -a "MacDown" "_posts/${choices[$input]}"
+        exit 0
+    fi
+fi
+
+now=`date "+%Y-%m-%d"`
+fileName="${now}-$1.markdown"
+cp "demo.markdown" "./_posts/$fileName"
+cd _posts
+sed -i '' "s/T/$1/" $fileName
+sed -i '' "s/D/$now/" $fileName
+open -a "MacDown" $fileName
+
+
 }
 ```
 
 只需一个write 命令 就可以按照格式创建好模版 和打开
 
-虽然我shell写的比较烂，各种命令不熟悉，还是觉得好牛逼
+虽然我shell写的比较烂，各种命令不熟悉，还是觉得可以
 
  
 
