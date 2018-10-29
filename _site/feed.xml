@@ -5,9 +5,447 @@
     <description>就为了好玩吧，也许以后还可以写点东西呢？</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 27 Jul 2018 14:22:33 +0800</pubDate>
-    <lastBuildDate>Fri, 27 Jul 2018 14:22:33 +0800</lastBuildDate>
+    <pubDate>Mon, 29 Oct 2018 15:24:48 +0800</pubDate>
+    <lastBuildDate>Mon, 29 Oct 2018 15:24:48 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>重构别人代码，顺便吐槽</title>
+        <description>&lt;p&gt;最近接手了别人的代码，因为不是很喜欢原来的写法，所以我就顺便重构一下，还吐槽一下，记还录一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;OC 和 Swift 的混用&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;项目本身是一个swift的项目，虽然里面会有一些OC的代码，但是大部分还是用swift写的。我认为，能够用swift的不要用OC的东西，就像String、Array这些基础数据，就不要使用NSString、NSArray之类的。但是，代码里面满是NSString之类的定义，如果全是使用NSSing 那也还勉强，但是各种 as string, as nsstring。何必呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/refactor/refactor-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;完全就是做了很多的无用功，要多写了好多的代码，能少写一行，就少一行。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;能少写一个单词，绝不多写一个。能用Swift的，就不用OC&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;超混乱的逻辑&lt;/strong&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 29 Oct 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/10/29/%E9%87%8D%E6%9E%84%E5%88%AB%E4%BA%BA%E4%BB%A3%E7%A0%81-%E9%A1%BA%E4%BE%BF%E5%90%90%E6%A7%BD/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/29/%E9%87%8D%E6%9E%84%E5%88%AB%E4%BA%BA%E4%BB%A3%E7%A0%81-%E9%A1%BA%E4%BE%BF%E5%90%90%E6%A7%BD/</guid>
+        
+        <category>重构</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>vim学习记录01</title>
+        <description>&lt;p&gt;听说Vim很厉害，一直没有怎么接触，平时也只是最简单的查看文件，所以学习一下，这里只是一些简单的Vim命令操作，作为自己的学习记录。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;shift + : &lt;/code&gt;进入命令模式，一些简单命令:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;打印： p，可以将文件内容打印到屏幕上&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:p 打印全部
+
+:1,3 p  打印1-3行
+
+:1,$ p  打印1-到最后一行
+
+1,5 表示1-5
+$表示文件尾
+
+:set number 对每一行设置行数
+:set nonumber  取消对每一行设置行数
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;删除: d， 删除行&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:1 d 删除第一行
+:1,5 d  删除1-5行
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;复制: co ，复制数据&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:1,3 co $  复制1-3行的数据到文件尾，$代表文件尾
+:2,5 co 9  复制2-5行的数据到第9行后面
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查找字符串: /key/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:/hello/ p  查找包含hello的行 并 打印，这种情况只会查找一个，如果需要查找全部，则加g
+
+:g/hello/ p 
+
+:1,10 /hello/ p  指定查找的行数
+
+以上的查找方式会找到所有包含hello的 比如：helloLL  wohello，如果只想查找 hello 这种，则可以：
+:g/\&amp;lt;hello\&amp;gt;/ p
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;查找和替换: s/key/another/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:10 s/key/KEY/  在第10行，用KEY 替换掉key
+:g/key/ s/haha/hehe/  查找所有包含可以的行，并且将那个行里面的haha 替换成 hehe,只会替换第一个查找到的haha，如果需要替换全部，则需要加g
+:g/key/ s/haha/hehe/g
+
+:s/key/&amp;amp;-ok/ 会把key替换成key-ok
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查找支持正则表达式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;如：查找以hello开头：
+:/^hello/
+以hello结尾
+:/hello*/
+
+或者查找Hello 和 hello
+:/[Hh]ello/
+
+查找空行
+:/^$/
+
+查找数字
+:/[1-9]/
+
+大小写转换:
+\u表示大些
+:s/[a-z]/\u &amp;amp;/g
+同样
+\l 表示小写
+:s/[A-Z]/\l &amp;amp;/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Wed, 17 Oct 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/10/17/vim%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9501/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/17/vim%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9501/</guid>
+        
+        <category>vim</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>用python查找未使用的文件</title>
+        <description>&lt;p&gt;项目开发久了就会存在很多不再使用的文件，太多了实在是占用资源，一个一个清理又太麻烦，所以，试着写个python练练手。&lt;/p&gt;
+
+&lt;p&gt;我对python3不熟悉，代码写的不咋地，这个就是练手而已。&lt;/p&gt;
+
+&lt;p&gt;思路比较简单&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;找到项目中的所有图片文件&lt;/li&gt;
+  &lt;li&gt;遍历所有的代码文件，一个一个文件去找，看是否存在&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-python3&quot;&gt;import os
+import sys
+///iOS项目
+///需要查找的文件夹
+if len(sys.argv) &amp;lt; 2:
+    exit()
+directory = sys.argv[1]
+
+///通过地址获取文件名
+def getNameWithLocation(location):
+    if location is None:
+        return &quot;&quot;
+    if &quot;.bundle&quot; in location:
+        return &quot;&quot;///忽略bundle文件
+    index = 1
+    if &quot;.xcassets&quot; in location:
+        index = 2
+    fileNameWithExtension = location.split(&quot;/&quot;)[-index]
+    fileNameWithOutExtension = fileNameWithExtension.split(&quot;.&quot;)[0]
+    if &quot;@&quot; in fileNameWithOutExtension:
+        fileNameWithOutExtension = fileNameWithOutExtension.split(&quot;@&quot;)[0] 
+    return '\&quot;' + fileNameWithOutExtension + '\&quot;'
+
+commonImageFiles = os.popen('find ./%s  -name &quot;*.png&quot; -o -name &quot;*.jpg&quot; -o -name &quot;*.gif&quot;' % (directory)).read().split('\n')
+///查找所有png,jpg,gif 文件
+
+imageNameLocationDic = {}
+imageUsedDic = {}
+for location in commonImageFiles:
+    name = getNameWithLocation(location)
+    if name == &quot;&quot;:
+        continue
+    imageNameLocationDic[name] = location
+    imageUsedDic[name] = 0
+
+swiftFiles = os.popen('find ./%s -name \&quot;*.swift\&quot;' % (directory)).read().split('\n') 
+ocFiles = os.popen('find ./%s -name \&quot;*.h\&quot; -o -name \&quot;*.m\&quot;' % (directory)).read().split('\n') 
+xibFiles = os.popen('find ./%s -name \&quot;*.xib\&quot; -o -name \&quot;*.storyboard\&quot;' % (directory)).read().split('\n') 
+allFiles = swiftFiles + ocFiles + xibFiles
+
+for file in allFiles:
+    if len(file) == 0:
+        continue
+    imageNames = list(imageNameLocationDic.keys())
+    with open(file, encoding='utf-8') as f:
+        text = f.read()
+        if text is not None:
+            for name in imageNames:
+                if imageUsedDic[name] is 1:
+                    continue
+                if name in text:
+                    imageUsedDic[name] = 1
+                    continue 
+        
+
+with open(&quot;unused.txt&quot;, 'w', encoding='utf-8') as f:
+    for (k, v) in imageUsedDic.items():
+        if v != 1:
+            f.write(imageNameLocationDic[k])
+            f.write('\n')
+
+exit()
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Tue, 16 Oct 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/10/16/%E7%94%A8python%E6%9F%A5%E6%89%BE%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/16/%E7%94%A8python%E6%9F%A5%E6%89%BE%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/</guid>
+        
+        <category>python3</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>贫乏</title>
+        <description>&lt;p&gt;###贫乏，无处不在&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;思想上的贫乏&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;没有思想，大脑如荒漠那样，满是荒凉。只有偶尔远处的一声鸣叫，还传递着生命的气息。试着读书，各种故事，各种悲伤，却只是我脑海的过眼云烟，终究是一无所获。&lt;br /&gt;
+  思想上的贫乏，带来的是文字上的空洞。提笔之间，纵使心中万千滋味，却只写出白水那样的平淡无味。水可解渴，文如水却使人生厌。&lt;br /&gt;
+  每读他人文字，如坐戏台前，台上人各自演绎别样人生，悲欢离合，使人难以忘怀。阅读完毕，仍有万千画面停留脑海，意犹未尽。&lt;br /&gt;
+  待到何时，我可下笔如画？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;生活上的贫乏&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;平凡的生活。有的人，没天都是多姿多彩，有的人，没天都是乏味。&lt;br /&gt;
+  在同样的年纪，为何人生却如此差距？回首往事，就像看一张白纸一样，除了满目的空白，竟无一色彩鲜艳处。&lt;br /&gt;
+  待到何时？能过有一个多彩的生活？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;物资上的贫乏&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;穷，无一物。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;唉，无可奈何！花已落，然果未到，空留满树疮痍。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 28 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/28/%E8%B4%AB%E4%B9%8F/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/28/%E8%B4%AB%E4%B9%8F/</guid>
+        
+        <category>写作</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>什么都没有</title>
+        <description>&lt;p&gt;其实，没什么想写的。&lt;/p&gt;
+
+&lt;p&gt;尽管，确实有许多的事情，心里有许多的东西，但是，说不出，写不下。&lt;/p&gt;
+
+&lt;p&gt;就像站在满是人海的广场，去何方？&lt;/p&gt;
+
+&lt;p&gt;总是有人擦肩而过，总是匆匆的离开。&lt;/p&gt;
+
+&lt;p&gt;眼中没有一个人，心里没有一个人。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 27 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/27/%E4%BB%80%E4%B9%88%E9%83%BD%E6%B2%A1%E6%9C%89/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/27/%E4%BB%80%E4%B9%88%E9%83%BD%E6%B2%A1%E6%9C%89/</guid>
+        
+        <category>写作</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>应该学习下shell</title>
+        <description>&lt;p&gt;应该学点shell，可以让自己方便好多。&lt;/p&gt;
+
+&lt;p&gt;以前看别人用terminal完成各种工作，写各种命令就觉得好牛逼。原以为那是玩Linux才会的东西，但是Mac用起来也很爽。&lt;/p&gt;
+
+&lt;p&gt;原以为shell是一个很复杂的东西，学习来很难。但是，当自己去看看的时候就发现，如果只是做些简单的工作，还是很简单的。虽然确实有很多的东西很难，而我发现自己确实很菜。&lt;/p&gt;
+
+&lt;p&gt;因为每天打开电脑都需要启动很多的程序，以前都是一个一个的去点，最近学了点shell，就想干嘛不写个脚本。发现，只需要一点shell的皮毛就可以完成了。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;work() {
+  /usr/bin/open -a &quot;/Applications/Google Chrome.app&quot; 'https://feedly.com/i/my'
+  /usr/bin/open 'http://work.com'
+  /usr/bin/open &quot;/Applications/Mail.app&quot;
+  /usr/bin/open &quot;/Applications/MotionPro.app&quot;
+  j main; /usr/bin/open work.project
+  cd ..
+  sh podUp.sh
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;只需一个work命令，就可以了。&lt;/p&gt;
+
+&lt;p&gt;写文章也是一样的&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;write() {
+  cd &quot;***.github.io&quot;
+allFiles=`ls _posts`
+fileArray=(${allFiles// / })
+index=0
+choices=()
+for v in ${fileArray[@]}
+do
+    if [[ $v == *$1* ]]; then
+    echo $index.$v
+    choices[$index]=$v
+    let index++
+    fi
+done
+
+fileName=&quot;&quot;
+
+if [ $index -gt 0 ];then
+    echo ${index}&quot;.新建&quot;
+    read input
+    if [ $input -lt $index -a $input -ge 0 ];then
+        open -a &quot;MacDown&quot; &quot;_posts/${choices[$input]}&quot;
+        exit 0
+    fi
+fi
+
+now=`date &quot;+%Y-%m-%d&quot;`
+fileName=&quot;${now}-$1.markdown&quot;
+cp &quot;demo.markdown&quot; &quot;./_posts/$fileName&quot;
+cd _posts
+sed -i '' &quot;s/T/$1/&quot; $fileName
+sed -i '' &quot;s/D/$now/&quot; $fileName
+open -a &quot;MacDown&quot; $fileName
+
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;只需一个write 命令 就可以按照格式创建好模版 和打开&lt;/p&gt;
+
+&lt;p&gt;虽然我shell写的比较烂，各种命令不熟悉，还是觉得可以&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 14 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/14/%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0%E4%B8%8Bshell/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/14/%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0%E4%B8%8Bshell/</guid>
+        
+        <category>Blog</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>跑步，有点累</title>
+        <description>&lt;p&gt;好久没有跑过步了，上周6下午去附近的公园跑了一下。距离不长，但是过程确实十分艰难，
+毕竟距离上次跑步已经很久了。 &lt;br /&gt;
+今天晚上又去了一次，跑的效果比上次好，但是腿太疼，走回来感觉自己的腿已经不是自己的了。&lt;br /&gt;
+但是，其实跑了这两次还是蛮爽的。以后还要多去跑跑。&lt;br /&gt;
+跑步真好，可以锻炼，可以忘却烦恼。身体真的很重要！&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 12 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/12/%E8%B7%91%E6%AD%A5-%E7%9C%9F%E7%9A%84%E7%B4%AF/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/12/%E8%B7%91%E6%AD%A5-%E7%9C%9F%E7%9A%84%E7%B4%AF/</guid>
+        
+        <category>跑步</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>读 编程珠玑 的一点感悟</title>
+        <description>&lt;p&gt;最近，趁着每天晚上的空余时间，把编程珠玑这本书翻了一下，谈谈感悟。&lt;/p&gt;
+
+&lt;p&gt;因为我水平有限，加上只是读了一遍，所以难免有地方理解不到位。&lt;/p&gt;
+
+&lt;p&gt;这本书从算法开始，然后讲了数据结构、程序优化等内容。作者对于很多的算法或者数据结构的优化都做了对比，通过作者的优化后，程序的提升时间提高了很多。原来只是知道优化可以提高时间，但是没有想到可以提升那么多。&lt;/p&gt;
+
+&lt;p&gt;通过优化数据结构或者算法，的确可以提高很多，但是，对于一个前端开发人员，那些优化的提升有多少？&lt;/p&gt;
+
+&lt;p&gt;前端不像后段，大多数情况下不需要处理那么多的数据，处理的数据也不是很复杂。而且当前的设备性能运算速度足够快了，那么是否还需要花时间去优化？&lt;/p&gt;
+
+&lt;p&gt;对于游戏、或者需要大规模运算的应用而言，是很有必要去做优化的，这样对用户的体验的确可以提升很多。但是，大多数的应用其实就是简单的业务应用，数据不够大，运算不够复杂。而且，如果项目比较紧，那么很可能完成任务都很紧迫了，是不会有时间去做优化的。&lt;/p&gt;
+
+&lt;p&gt;但是，不论是数据结构或者算法之类的问题，我想对于一个开发人员都是要必须会的，也许现在不会遇到性能的问题，但是很难说那天就需要做优化。而且，这背后更多的是一种思想，一种编程的思想。如果我们想走的更远，有一个更好的发展，那么我们就必须具备这种思想。&lt;/p&gt;
+
+&lt;p&gt;特别是现在的很多面试之类的都喜欢算法，平时多积累一点，说不定那天就用上了呢？&lt;/p&gt;
+</description>
+        <pubDate>Tue, 14 Aug 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/08/14/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91-%E8%AF%BB/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/08/14/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91-%E8%AF%BB/</guid>
+        
+        <category>读书</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>读 程序员修炼之道的一点感悟</title>
+        <description>&lt;p&gt;很早就知道 程序员修炼之道 这本书，但是一直没有机会去读一下。刚好最近工作不太忙，就趁这个机会读了一下。&lt;/p&gt;
+
+&lt;p&gt;对于一个程序员而言，这本书给出了很多的意见，从需求、编码、到项目管理。对于书中的很多观点，都可以给人很多的启发，但是，对于现在的我而言，要想理解这本书中的那些建议，可能很困难。只能慢慢的摸索，慢慢的去理解和执行那些意见。&lt;/p&gt;
+
+&lt;p&gt;这里，选几条我印象最深刻的&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;不要只是提出问题，而是提出问题的解决方法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我们的工作中，总是会有很多的问题，作为一个开发者而言，我们需要从项目中发现问题和提出问题。也许其他人会征求我们的意见，要我们发现项目存在的问题。&lt;/p&gt;
+
+&lt;p&gt;然后我们发现问题，列了好长的一串清单，然后高兴的交了上去，然后我们自认为很好的完成了任务。其实，完全没有。这只是一种60分的表现，我们需要做到90分。&lt;/p&gt;
+
+&lt;p&gt;如何做到90分？那就是解决问题，提书一种解决问题的方案。不要只是给别人提各种的问题，最好可以附带一个解决方案。也许我们自己想到的解决方案不够好，有很多的问题，但是，哪有什么关系？有问题可以讨论，可以一起想办法。但是，如果连一个解决问题的方案都没有，连讨论的机会都没有了。&lt;/p&gt;
+
+&lt;p&gt;所以，以后我一定到时刻的提醒自己，不要只是提出问题，而是提出一个解决问题的方案。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;不要留破窗户&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;破窗户理论，如果一个地方有了一个破窗户，那么将会有更多的破窗户。&lt;/p&gt;
+
+&lt;p&gt;在我们的开发过程中，我们不可能写出完美的代码，总是会有各种想不到的问题。也许是一个命名的不规范、一个函数的写法不规范。但是，当我们发现这个问题时，我们应该解决这个问题，修好这个破了的窗户。如果我们置之不理，那么在以后我们的工作中，我们就有一种心理，既然已经有一个破窗户了，那么再破几个也无所谓了。如果这样的长期下去，我们项目的破窗户只会越来越多，我们的项目也只会变得越来越糟糕。&lt;/p&gt;
+
+&lt;p&gt;所以，不要给我们的工作留下破窗户，发现一个破了的窗户，修好它。这个我们的项目才可以更好。&lt;/p&gt;
+
+&lt;p&gt;未完待续。。。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 13 Aug 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/08/13/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93-%E8%AF%BB/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/08/13/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93-%E8%AF%BB/</guid>
+        
+        <category>读书</category>
+        
+        
+      </item>
     
       <item>
         <title>开始读书、写作</title>
@@ -25,110 +463,6 @@
         <category>读书</category>
         
         <category>写作</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>JS通过Promise调用OC方法</title>
-        <description>&lt;p&gt;###Javascript调用OC使用Promise&lt;/p&gt;
-
-&lt;p&gt;JavaScript代码&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;amp;&amp;amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
-
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;使用&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ios.emmit('method',{}).then(function(val) {
-
-}).catch(functhon(error) {
-
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;水平有限，请指教&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 25 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/</guid>
-        
-        <category>OC</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>build my git blog</title>
-        <description>&lt;p&gt;试着写一些东西&lt;br /&gt;
-虽然写不出来&lt;br /&gt;
-但是&lt;br /&gt;
-以后的事情&lt;br /&gt;
-谁知道呢&lt;br /&gt;
-也许开始了&lt;br /&gt;
-以后就好办了&lt;br /&gt;
-所以啊&lt;br /&gt;
-我还是要试一下&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/03/01/blog-build/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/03/01/blog-build/</guid>
-        
-        <category>Blog</category>
-        
-        <category>Github</category>
         
         
       </item>

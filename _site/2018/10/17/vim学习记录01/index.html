@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>vim学习记录01 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/10/17/vim%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9501/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#vim" title="vim">vim</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>vim学习记录01</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">vim 学习</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on October 17, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,74 +170,91 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>听说Vim很厉害，一直没有怎么接触，平时也只是最简单的查看文件，所以学习一下，这里只是一些简单的Vim命令操作，作为自己的学习记录。</p>
 
-<p>JavaScript代码</p>
+<p><code class="highlighter-rouge">shift + : </code>进入命令模式，一些简单命令:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+<ul>
+  <li>打印： p，可以将文件内容打印到屏幕上</li>
+</ul>
 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:p 打印全部
 
-</code></pre></div></div>
-<p>使用</p>
+:1,3 p  打印1-3行
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
+:1,$ p  打印1-到最后一行
 
-}).catch(functhon(error) {
+1,5 表示1-5
+$表示文件尾
 
-})
+:set number 对每一行设置行数
+:set nonumber  取消对每一行设置行数
 </code></pre></div></div>
 
-<p>水平有限，请指教</p>
+<ul>
+  <li>删除: d， 删除行</li>
+</ul>
 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:1 d 删除第一行
+:1,5 d  删除1-5行
+</code></pre></div></div>
+<ul>
+  <li>复制: co ，复制数据</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:1,3 co $  复制1-3行的数据到文件尾，$代表文件尾
+:2,5 co 9  复制2-5行的数据到第9行后面
+</code></pre></div></div>
+
+<ul>
+  <li>查找字符串: /key/</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:/hello/ p  查找包含hello的行 并 打印，这种情况只会查找一个，如果需要查找全部，则加g
+
+:g/hello/ p 
+
+:1,10 /hello/ p  指定查找的行数
+
+以上的查找方式会找到所有包含hello的 比如：helloLL  wohello，如果只想查找 hello 这种，则可以：
+:g/\&lt;hello\&gt;/ p
+</code></pre></div></div>
+<ul>
+  <li>查找和替换: s/key/another/</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:10 s/key/KEY/  在第10行，用KEY 替换掉key
+:g/key/ s/haha/hehe/  查找所有包含可以的行，并且将那个行里面的haha 替换成 hehe,只会替换第一个查找到的haha，如果需要替换全部，则需要加g
+:g/key/ s/haha/hehe/g
+
+:s/key/&amp;-ok/ 会把key替换成key-ok
+</code></pre></div></div>
+
+<ul>
+  <li>查找支持正则表达式</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>如：查找以hello开头：
+:/^hello/
+以hello结尾
+:/hello*/
+
+或者查找Hello 和 hello
+:/[Hh]ello/
+
+查找空行
+:/^$/
+
+查找数字
+:/[1-9]/
+
+大小写转换:
+\u表示大些
+:s/[a-z]/\u &amp;/g
+同样
+\l 表示小写
+:s/[A-Z]/\l &amp;/g
+</code></pre></div></div>
 
 
                 <hr>
@@ -248,12 +265,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/10/16/%E7%94%A8python%E6%9F%A5%E6%89%BE%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/" data-toggle="tooltip" data-placement="top" title="用python查找未使用的文件">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/10/29/%E9%87%8D%E6%9E%84%E5%88%AB%E4%BA%BA%E4%BB%A3%E7%A0%81-%E9%A1%BA%E4%BE%BF%E5%90%90%E6%A7%BD/" data-toggle="tooltip" data-placement="top" title="重构别人代码，顺便吐槽">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

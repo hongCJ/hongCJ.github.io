@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>贫乏 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/09/28/%E8%B4%AB%E4%B9%8F/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#写作" title="写作">写作</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>贫乏</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">无</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on September 28, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,73 +170,32 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>###贫乏，无处不在</p>
 
-<p>JavaScript代码</p>
+<ul>
+  <li>
+    <p><strong>思想上的贫乏</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+    <p>没有思想，大脑如荒漠那样，满是荒凉。只有偶尔远处的一声鸣叫，还传递着生命的气息。试着读书，各种故事，各种悲伤，却只是我脑海的过眼云烟，终究是一无所获。<br />
+  思想上的贫乏，带来的是文字上的空洞。提笔之间，纵使心中万千滋味，却只写出白水那样的平淡无味。水可解渴，文如水却使人生厌。<br />
+  每读他人文字，如坐戏台前，台上人各自演绎别样人生，悲欢离合，使人难以忘怀。阅读完毕，仍有万千画面停留脑海，意犹未尽。<br />
+  待到何时，我可下笔如画？</p>
+  </li>
+  <li>
+    <p><strong>生活上的贫乏</strong></p>
 
+    <p>平凡的生活。有的人，没天都是多姿多彩，有的人，没天都是乏味。<br />
+  在同样的年纪，为何人生却如此差距？回首往事，就像看一张白纸一样，除了满目的空白，竟无一色彩鲜艳处。<br />
+  待到何时？能过有一个多彩的生活？</p>
+  </li>
+  <li>
+    <p><strong>物资上的贫乏</strong></p>
 
-</code></pre></div></div>
-<p>使用</p>
+    <p>穷，无一物。</p>
+  </li>
+</ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
-
-}).catch(functhon(error) {
-
-})
-</code></pre></div></div>
-
-<p>水平有限，请指教</p>
+<p>唉，无可奈何！花已落，然果未到，空留满树疮痍。</p>
 
 
 
@@ -248,12 +207,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/09/27/%E4%BB%80%E4%B9%88%E9%83%BD%E6%B2%A1%E6%9C%89/" data-toggle="tooltip" data-placement="top" title="什么都没有">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/10/16/%E7%94%A8python%E6%9F%A5%E6%89%BE%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/" data-toggle="tooltip" data-placement="top" title="用python查找未使用的文件">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

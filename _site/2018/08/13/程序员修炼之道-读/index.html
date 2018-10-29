@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>读 程序员修炼之道的一点感悟 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/08/13/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93-%E8%AF%BB/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#读书" title="读书">读书</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>读 程序员修炼之道的一点感悟</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">读书</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on August 13, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,74 +170,35 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>很早就知道 程序员修炼之道 这本书，但是一直没有机会去读一下。刚好最近工作不太忙，就趁这个机会读了一下。</p>
 
-<p>JavaScript代码</p>
+<p>对于一个程序员而言，这本书给出了很多的意见，从需求、编码、到项目管理。对于书中的很多观点，都可以给人很多的启发，但是，对于现在的我而言，要想理解这本书中的那些建议，可能很困难。只能慢慢的摸索，慢慢的去理解和执行那些意见。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+<p>这里，选几条我印象最深刻的</p>
 
+<blockquote>
+  <p>不要只是提出问题，而是提出问题的解决方法</p>
+</blockquote>
 
-</code></pre></div></div>
-<p>使用</p>
+<p>我们的工作中，总是会有很多的问题，作为一个开发者而言，我们需要从项目中发现问题和提出问题。也许其他人会征求我们的意见，要我们发现项目存在的问题。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
+<p>然后我们发现问题，列了好长的一串清单，然后高兴的交了上去，然后我们自认为很好的完成了任务。其实，完全没有。这只是一种60分的表现，我们需要做到90分。</p>
 
-}).catch(functhon(error) {
+<p>如何做到90分？那就是解决问题，提书一种解决问题的方案。不要只是给别人提各种的问题，最好可以附带一个解决方案。也许我们自己想到的解决方案不够好，有很多的问题，但是，哪有什么关系？有问题可以讨论，可以一起想办法。但是，如果连一个解决问题的方案都没有，连讨论的机会都没有了。</p>
 
-})
-</code></pre></div></div>
+<p>所以，以后我一定到时刻的提醒自己，不要只是提出问题，而是提出一个解决问题的方案。</p>
 
-<p>水平有限，请指教</p>
+<blockquote>
+  <p>不要留破窗户</p>
+</blockquote>
 
+<p>破窗户理论，如果一个地方有了一个破窗户，那么将会有更多的破窗户。</p>
+
+<p>在我们的开发过程中，我们不可能写出完美的代码，总是会有各种想不到的问题。也许是一个命名的不规范、一个函数的写法不规范。但是，当我们发现这个问题时，我们应该解决这个问题，修好这个破了的窗户。如果我们置之不理，那么在以后我们的工作中，我们就有一种心理，既然已经有一个破窗户了，那么再破几个也无所谓了。如果这样的长期下去，我们项目的破窗户只会越来越多，我们的项目也只会变得越来越糟糕。</p>
+
+<p>所以，不要给我们的工作留下破窗户，发现一个破了的窗户，修好它。这个我们的项目才可以更好。</p>
+
+<p>未完待续。。。</p>
 
 
                 <hr>
@@ -248,12 +209,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/08/14/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91-%E8%AF%BB/" data-toggle="tooltip" data-placement="top" title="读 编程珠玑 的一点感悟">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

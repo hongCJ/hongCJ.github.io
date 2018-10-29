@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>跑步，有点累 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/09/12/%E8%B7%91%E6%AD%A5-%E7%9C%9F%E7%9A%84%E7%B4%AF/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#跑步" title="跑步">跑步</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>跑步，有点累</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">跑</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on September 12, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,73 +170,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
-
-<p>JavaScript代码</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
-
-
-</code></pre></div></div>
-<p>使用</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
-
-}).catch(functhon(error) {
-
-})
-</code></pre></div></div>
-
-<p>水平有限，请指教</p>
+				<p>好久没有跑过步了，上周6下午去附近的公园跑了一下。距离不长，但是过程确实十分艰难，
+毕竟距离上次跑步已经很久了。 <br />
+今天晚上又去了一次，跑的效果比上次好，但是腿太疼，走回来感觉自己的腿已经不是自己的了。<br />
+但是，其实跑了这两次还是蛮爽的。以后还要多去跑跑。<br />
+跑步真好，可以锻炼，可以忘却烦恼。身体真的很重要！</p>
 
 
 
@@ -248,12 +186,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/08/14/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91-%E8%AF%BB/" data-toggle="tooltip" data-placement="top" title="读 编程珠玑 的一点感悟">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/09/14/%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0%E4%B8%8Bshell/" data-toggle="tooltip" data-placement="top" title="应该学习下shell">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

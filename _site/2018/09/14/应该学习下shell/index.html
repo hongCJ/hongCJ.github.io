@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>应该学习下shell - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/09/14/%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0%E4%B8%8Bshell/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>应该学习下shell</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">shell</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on September 14, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,73 +170,71 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>应该学点shell，可以让自己方便好多。</p>
 
-<p>JavaScript代码</p>
+<p>以前看别人用terminal完成各种工作，写各种命令就觉得好牛逼。原以为那是玩Linux才会的东西，但是Mac用起来也很爽。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+<p>原以为shell是一个很复杂的东西，学习来很难。但是，当自己去看看的时候就发现，如果只是做些简单的工作，还是很简单的。虽然确实有很多的东西很难，而我发现自己确实很菜。</p>
 
+<p>因为每天打开电脑都需要启动很多的程序，以前都是一个一个的去点，最近学了点shell，就想干嘛不写个脚本。发现，只需要一点shell的皮毛就可以完成了。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>work() {
+  /usr/bin/open -a "/Applications/Google Chrome.app" 'https://feedly.com/i/my'
+  /usr/bin/open 'http://work.com'
+  /usr/bin/open "/Applications/Mail.app"
+  /usr/bin/open "/Applications/MotionPro.app"
+  j main; /usr/bin/open work.project
+  cd ..
+  sh podUp.sh
+}
 
 </code></pre></div></div>
-<p>使用</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
+<p>只需一个work命令，就可以了。</p>
 
-}).catch(functhon(error) {
+<p>写文章也是一样的</p>
 
-})
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>write() {
+  cd "***.github.io"
+allFiles=`ls _posts`
+fileArray=(${allFiles// / })
+index=0
+choices=()
+for v in ${fileArray[@]}
+do
+    if [[ $v == *$1* ]]; then
+    echo $index.$v
+    choices[$index]=$v
+    let index++
+    fi
+done
+
+fileName=""
+
+if [ $index -gt 0 ];then
+    echo ${index}".新建"
+    read input
+    if [ $input -lt $index -a $input -ge 0 ];then
+        open -a "MacDown" "_posts/${choices[$input]}"
+        exit 0
+    fi
+fi
+
+now=`date "+%Y-%m-%d"`
+fileName="${now}-$1.markdown"
+cp "demo.markdown" "./_posts/$fileName"
+cd _posts
+sed -i '' "s/T/$1/" $fileName
+sed -i '' "s/D/$now/" $fileName
+open -a "MacDown" $fileName
+
+
+}
 </code></pre></div></div>
 
-<p>水平有限，请指教</p>
+<p>只需一个write 命令 就可以按照格式创建好模版 和打开</p>
+
+<p>虽然我shell写的比较烂，各种命令不熟悉，还是觉得可以</p>
 
 
 
@@ -248,12 +246,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/09/12/%E8%B7%91%E6%AD%A5-%E7%9C%9F%E7%9A%84%E7%B4%AF/" data-toggle="tooltip" data-placement="top" title="跑步，有点累">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/09/27/%E4%BB%80%E4%B9%88%E9%83%BD%E6%B2%A1%E6%9C%89/" data-toggle="tooltip" data-placement="top" title="什么都没有">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

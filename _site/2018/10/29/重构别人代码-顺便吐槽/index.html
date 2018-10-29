@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>重构别人代码，顺便吐槽 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/10/29/%E9%87%8D%E6%9E%84%E5%88%AB%E4%BA%BA%E4%BB%A3%E7%A0%81-%E9%A1%BA%E4%BE%BF%E5%90%90%E6%A7%BD/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#重构" title="重构">重构</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>重构别人代码，顺便吐槽</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">重构</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on October 29, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,73 +170,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>最近接手了别人的代码，因为不是很喜欢原来的写法，所以我就顺便重构一下，还吐槽一下，记还录一下。</p>
 
-<p>JavaScript代码</p>
+<p><strong>OC 和 Swift 的混用</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+<p>项目本身是一个swift的项目，虽然里面会有一些OC的代码，但是大部分还是用swift写的。我认为，能够用swift的不要用OC的东西，就像String、Array这些基础数据，就不要使用NSString、NSArray之类的。但是，代码里面满是NSString之类的定义，如果全是使用NSSing 那也还勉强，但是各种 as string, as nsstring。何必呢？</p>
 
+<p><img src="/img/refactor/refactor-1.png" alt="" /></p>
 
-</code></pre></div></div>
-<p>使用</p>
+<p>完全就是做了很多的无用功，要多写了好多的代码，能少写一行，就少一行。</p>
+<blockquote>
+  <p>能少写一个单词，绝不多写一个。能用Swift的，就不用OC</p>
+</blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
-
-}).catch(functhon(error) {
-
-})
-</code></pre></div></div>
-
-<p>水平有限，请指教</p>
+<p><strong>超混乱的逻辑</strong></p>
 
 
 
@@ -248,13 +195,9 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/10/17/vim%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9501/" data-toggle="tooltip" data-placement="top" title="vim学习记录01">&larr; Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
-                    </li>
                     
                 </ul>
 

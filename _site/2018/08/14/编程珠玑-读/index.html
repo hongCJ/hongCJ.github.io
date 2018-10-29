@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>读 编程珠玑 的一点感悟 - 鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/2018/08/14/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91-%E8%AF%BB/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,15 +144,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
+                        <a class="tag" href="/tags/#读书" title="读书">读书</a>
                         
                     </div>
-                    <h1>JS通过Promise调用OC方法</h1>
+                    <h1>读 编程珠玑 的一点感悟</h1>
                     
                     
-                    <h2 class="subheading">使用wkWebView</h2>
+                    <h2 class="subheading">读书</h2>
                     
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+                    <span class="meta"> 鸿 on August 14, 2018</span>
                 </div>
             </div>
         </div>
@@ -170,74 +170,21 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>###Javascript调用OC使用Promise</p>
+				<p>最近，趁着每天晚上的空余时间，把编程珠玑这本书翻了一下，谈谈感悟。</p>
 
-<p>JavaScript代码</p>
+<p>因为我水平有限，加上只是读了一遍，所以难免有地方理解不到位。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
-	class i_handler {
-		constructor (s,f) {
-			this.success = s
-			this.fail = f
-		}
-	}
-    class iOS {
-        constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+<p>这本书从算法开始，然后讲了数据结构、程序优化等内容。作者对于很多的算法或者数据结构的优化都做了对比，通过作者的优化后，程序的提升时间提高了很多。原来只是知道优化可以提高时间，但是没有想到可以提升那么多。</p>
 
+<p>通过优化数据结构或者算法，的确可以提高很多，但是，对于一个前端开发人员，那些优化的提升有多少？</p>
 
-</code></pre></div></div>
-<p>使用</p>
+<p>前端不像后段，大多数情况下不需要处理那么多的数据，处理的数据也不是很复杂。而且当前的设备性能运算速度足够快了，那么是否还需要花时间去优化？</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
+<p>对于游戏、或者需要大规模运算的应用而言，是很有必要去做优化的，这样对用户的体验的确可以提升很多。但是，大多数的应用其实就是简单的业务应用，数据不够大，运算不够复杂。而且，如果项目比较紧，那么很可能完成任务都很紧迫了，是不会有时间去做优化的。</p>
 
-}).catch(functhon(error) {
+<p>但是，不论是数据结构或者算法之类的问题，我想对于一个开发人员都是要必须会的，也许现在不会遇到性能的问题，但是很难说那天就需要做优化。而且，这背后更多的是一种思想，一种编程的思想。如果我们想走的更远，有一个更好的发展，那么我们就必须具备这种思想。</p>
 
-})
-</code></pre></div></div>
-
-<p>水平有限，请指教</p>
-
+<p>特别是现在的很多面试之类的都喜欢算法，平时多积累一点，说不定那天就用上了呢？</p>
 
 
                 <hr>
@@ -248,12 +195,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
+                        <a href="/2018/08/13/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93-%E8%AF%BB/" data-toggle="tooltip" data-placement="top" title="读 程序员修炼之道的一点感悟">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
+                        <a href="/2018/09/12/%E8%B7%91%E6%AD%A5-%E7%9C%9F%E7%9A%84%E7%B4%AF/" data-toggle="tooltip" data-placement="top" title="跑步，有点累">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

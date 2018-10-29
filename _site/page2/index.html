@@ -10,9 +10,9 @@
     <meta name="keyword"  content="鸿 blog 开发">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>JS通过Promise调用OC方法 - 鸿 | O</title>
+    <title>鸿 | O</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+    <link rel="canonical" href="http://localhost:4000/page2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -127,54 +127,52 @@
 </script>
 
 
-    <!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/#OC" title="OC">OC</a>
-                        
-                    </div>
-                    <h1>JS通过Promise调用OC方法</h1>
-                    
-                    
-                    <h2 class="subheading">使用wkWebView</h2>
-                    
-                    <span class="meta"> 鸿 on May 25, 2018</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>鸿</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">一个人地方，做一个人的事情</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
 
+<!-- USE SIDEBAR -->
     <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2018/05/25/JS%E4%BD%BF%E7%94%A8Promise%E8%B0%83%E7%94%A8OC/">
+        <h2 class="post-title">
+            JS通过Promise调用OC方法
+        </h2>
+        
+        <h3 class="post-subtitle">
+            使用wkWebView
+        </h3>
+        
+        <div class="post-content-preview">
+            ###Javascript调用OC使用Promise
 
-				<p>###Javascript调用OC使用Promise</p>
+JavaScript代码
 
-<p>JavaScript代码</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!function(w){
+!function(w){
 	class i_handler {
 		constructor (s,f) {
 			this.success = s
@@ -183,159 +181,181 @@
 	}
     class iOS {
         constructor () {
-            this.calls = new Map();
-        }
-        native (val) {
-        	if (typeof val !== 'object') {
-        		return
-        	}
-        	let key = val.identifier; 
-        	if (typeof key === 'string' &amp;&amp; this.calls.has(key)) {
-        		let c = this.calls.get(key);
-        		let successfull = val.successfull;
-        		if (successfull) {
-        			c.success(val.data);
-        		} else {
-        			c.fail(val.data); 
-        		}
-        		this.calls.delete(key);
-        	}
-        }
-        emmit (method,paramater) {
-            return new Promise(function(resoleve,reject) {
-            	if (typeof method !== 'string' || method.length === 0) {
-            		reject('方法名不能为空')
-            		return;
-            	}
-            	let date = new Date();
-            	let identifier = method + date.toDateString()
-            	let msg = {
-            		handler:method,
-            		parameter:paramater,
-            		identifier:identifier,
-            	}
-            	let c = new i_handler(resoleve,reject);
-            	ios.calls.set(identifier,c)
-            	window.webkit.messageHandlers.iOS.postMessage(msg);
-            })
-        }
-    }
-    if (!Reflect.has(w,'ios')) {
-    	w.ios = new iOS();
-    }
-}(window)
+            thi...
+        </div>
+    </a>
+    <p class="post-meta">
+         鸿 on May 25, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/03/01/blog-build/">
+        <h2 class="post-title">
+            build my git blog
+        </h2>
+        
+        <h3 class="post-subtitle">
+            try build a blog
+        </h3>
+        
+        <div class="post-content-preview">
+            试着写一些东西
+虽然写不出来
+但是
+以后的事情
+谁知道呢
+也许开始了
+以后就好办了
+所以啊
+我还是要试一下
 
 
-</code></pre></div></div>
-<p>使用</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ios.emmit('method',{}).then(function(val) {
-
-}).catch(functhon(error) {
-
-})
-</code></pre></div></div>
-
-<p>水平有限，请指教</p>
+        </div>
+    </a>
+    <p class="post-meta">
+         鸿 on March 1, 2018
+    </p>
+</div>
+<hr>
 
 
+<!-- Pager -->
 
-                <hr>
-
-                
-
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/03/01/blog-build/" data-toggle="tooltip" data-placement="top" title="build my git blog">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/07/27/%E8%AF%BB%E4%B9%A6-%E5%86%99%E4%BD%9C/" data-toggle="tooltip" data-placement="top" title="开始读书、写作">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
+    </li>
+    
+    
+</ul>
 
 
-                
-
-                
-
-            </div>
-
+    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
                 <!-- 标签 -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">标签</a></h5>
                     <div class="tags">
-        				
+                        
                             
-                				<a href="/tags/#Blog" title="Blog" rel="2">
+                                <a href="/tags/#Blog" title="Blog" rel="2">
                                     Blog
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Github" title="Github" rel="1">
+                                <a href="/tags/#Github" title="Github" rel="1">
                                     Github
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#OC" title="OC" rel="1">
+                                <a href="/tags/#OC" title="OC" rel="1">
                                     OC
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#读书" title="读书" rel="3">
+                                <a href="/tags/#读书" title="读书" rel="3">
                                     读书
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#写作" title="写作" rel="3">
+                                <a href="/tags/#写作" title="写作" rel="3">
                                     写作
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#跑步" title="跑步" rel="1">
+                                <a href="/tags/#跑步" title="跑步" rel="1">
                                     跑步
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#python3" title="python3" rel="1">
+                                <a href="/tags/#python3" title="python3" rel="1">
                                     python3
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#vim" title="vim" rel="1">
+                                <a href="/tags/#vim" title="vim" rel="1">
                                     vim
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#重构" title="重构" rel="1">
+                                <a href="/tags/#重构" title="重构" rel="1">
                                     重构
                                 </a>
                             
-        				
-        			</div>
+                        
+                    </div>
                 </section>
                 
 
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">关于我</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/img/avatar-hong.jpeg" />
+                        
+                        
+                            <p>学点技术，看看足球，看点漫画，看看书。这样！</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.zhihu.com/people/hong1109">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/81d97c6823cf">
+                                    <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-jianshu fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                            </li>
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/hongCJ">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -348,52 +368,10 @@
                     
                 </ul>
                 
-            </div>
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
+    		</div>
+        
+	</div>
+</div>
 
 
     <!-- Footer -->
