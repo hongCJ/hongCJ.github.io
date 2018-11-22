@@ -5,9 +5,9 @@
     <description>就为了好玩吧，也许以后还可以写点东西呢？</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 29 Oct 2018 15:24:48 +0800</pubDate>
-    <lastBuildDate>Mon, 29 Oct 2018 15:24:48 +0800</lastBuildDate>
-    <generator>Jekyll v3.7.3</generator>
+    <pubDate>Tue, 06 Nov 2018 15:43:53 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Nov 2018 15:43:53 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>重构别人代码，顺便吐槽</title>
@@ -24,7 +24,39 @@
   &lt;p&gt;能少写一个单词，绝不多写一个。能用Swift的，就不用OC&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;strong&gt;超混乱的逻辑&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;啰嗦的代码&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如上图，前三行代码其实就只需要一行代码就搞定了，还要写个判断，完全的就是多余的啊。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;nick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nickName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;多出来的代码带不来任何的好处，还会带来混乱。代码中到处都是这种代码，完全没有必要。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;超长的函数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/refactor/refactor-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这么长的函数，里面逻辑又不清楚，为了重构这个方法，苦不堪言。 
+一个函数不要太长，如果逻辑复杂，那就因该提取出来一些，这样逻辑也清楚了，维护起来也好一些&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;重复的代码&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果一个代码重复用了几次，那就因该抽出来了。&lt;br /&gt;
+&lt;img src=&quot;/img/refactor/refactor-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一模一样啊，一模一样啊，一模一样啊，一模一样啊，一模一样啊。
+完全可以合并啊，只写一次啊&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;多用guard啊&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;代码里面各种if，各种嵌套，导致代码根本不知道怎么看。很多时候，都不知道代码的范围在哪儿了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;其他&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;其他诸如命名不规范什么的，不想吐槽了。&lt;/p&gt;
+
+&lt;p&gt;虽然我自己的水平也就那样，但是，还是一言难尽啊！&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 29 Oct 2018 00:00:00 +0800</pubDate>

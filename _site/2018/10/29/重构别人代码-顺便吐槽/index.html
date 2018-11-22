@@ -183,7 +183,39 @@
   <p>能少写一个单词，绝不多写一个。能用Swift的，就不用OC</p>
 </blockquote>
 
-<p><strong>超混乱的逻辑</strong></p>
+<p><strong>啰嗦的代码</strong></p>
+
+<p>如上图，前三行代码其实就只需要一行代码就搞定了，还要写个判断，完全的就是多余的啊。</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">nick</span> <span class="o">=</span> <span class="n">model</span><span class="p">?</span><span class="o">.</span><span class="n">nickName</span> <span class="p">??</span> <span class="s">""</span>
+
+</code></pre></div></div>
+<p>多出来的代码带不来任何的好处，还会带来混乱。代码中到处都是这种代码，完全没有必要。</p>
+
+<p><strong>超长的函数</strong></p>
+
+<p><img src="/img/refactor/refactor-2.png" alt="" /></p>
+
+<p>这么长的函数，里面逻辑又不清楚，为了重构这个方法，苦不堪言。 
+一个函数不要太长，如果逻辑复杂，那就因该提取出来一些，这样逻辑也清楚了，维护起来也好一些</p>
+
+<p><strong>重复的代码</strong></p>
+
+<p>如果一个代码重复用了几次，那就因该抽出来了。<br />
+<img src="/img/refactor/refactor-3.png" alt="" /></p>
+
+<p>一模一样啊，一模一样啊，一模一样啊，一模一样啊，一模一样啊。
+完全可以合并啊，只写一次啊</p>
+
+<p><strong>多用guard啊</strong></p>
+
+<p>代码里面各种if，各种嵌套，导致代码根本不知道怎么看。很多时候，都不知道代码的范围在哪儿了。</p>
+
+<p><strong>其他</strong></p>
+
+<p>其他诸如命名不规范什么的，不想吐槽了。</p>
+
+<p>虽然我自己的水平也就那样，但是，还是一言难尽啊！</p>
 
 
 
