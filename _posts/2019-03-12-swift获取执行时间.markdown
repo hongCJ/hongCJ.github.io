@@ -1,0 +1,51 @@
+---
+layout:     post
+title:      "swift获取执行时间"
+subtitle:   "时间"
+date:       2019-03-12
+author:     "鸿"
+header-img: "img/home-bg.jpg"
+tags:
+    - 笔记
+---
+
+
+
+第一、
+
+```swift
+do {
+    var info = mach_timebase_info(numer: 0, denom: 0)
+    mach_timebase_info(&info)
+    let begin = mach_absolute_time()
+    // do something
+    let diff = Double(mach_absolute_time() - begin) * Double(info.numer) / Double(info.denom)
+}
+```
+
+
+
+第二、
+
+```swift
+do {
+    let info = ProcessInfo.processInfo
+    let begin = info.systemUptime
+    // do something
+    let diff = (info.systemUptime - begin)
+}
+```
+
+
+
+第三、
+
+```
+do {
+    let begin = clock()
+    // do something
+    let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
+}
+```
+
+from: https://stackoverflow.com/questions/24755558/measure-elapsed-time-in-swift
