@@ -1,0 +1,27 @@
+---
+layout:     post
+title:      "js-note"
+subtitle:   "some note"
+date:       2019-09-19
+author:     "鸿"
+header-img: "img/home-bg.jpg"
+tags:
+    - note
+---
+
+## 一些JS的笔记
+
+### 计算执行时间
+
+```javascript
+var t0 = performance.now();
+
+doSomething();   // <---- The function you're measuring time for 
+
+var t1 = performance.now();
+console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
+
+console.time('funs');
+doSomething();
+console.timeEnd('funs');
+```
