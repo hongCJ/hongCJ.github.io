@@ -1,0 +1,222 @@
+---
+layout:     post
+title:      "apple-lldb-doc"
+subtitle:   "lldb"
+date:       2020-05-21
+author:     "鸿"
+header-img: "img/home-bg.jpg"
+tags:
+    - 笔记
+---
+
+## 关于使用lldb的官方文档记录
+
+这个文档是我看苹果官方文档[gdb_to_lldb_transition_guide](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-basics.html) 的一个阅读笔记。
+
+### 基础介绍
+
+* lldb 的格式:
+
+```
+<command> [<subcommand> [<subcommand>...]] <action> [-options [option-value]] [argument [argument...]]
+```
+
+每一个command 都负责创建一个执行上下文context为子命令，例如subcommand就会在command创建的context里面执行。
+
+action 是想要在 command创建的context里面执行的操作。
+options 是 action的修饰语
+
+当参数为字符串的时候，可以使用单引号 或者 双引号。使用双引号的时候，对于字符串里面的双引号需要或者、反斜线需要 使用一个反斜线修饰。
+
+> (lldb) command [subcommand] -option "some \"quoted\" string"
+> 
+> (lldb) command [subcommand] -option 'some "quoted" string'
+
+使用aliases
+
+```
+(lldb) command alias bfl breakpoint set -f %1 -l %2 // 设置alias
+
+(lldb) bfl foo.c 12 //使用
+```
+
+### 常用命令
+
+重新启动程序，相当于手动点run、command + r
+
+> (lldb) process launch
+> (lldb) run
+> (lldb) r
+
+attach 到程序 用process id 或者 name
+
+> (lldb) process attach --pid 123
+> (lldb) attach -p 123
+> (lldb) process attach --name a.out
+> (lldb) pro at -n a.out
+> 
+> thread step-in
+> step
+> s
+> 
+> thread step-over
+> next
+> n
+
+Step out of the currently selected frame.
+
+> (lldb) thread step-out
+> 
+> (lldb) finish
+> 
+> (lldb) target stop-hook add
+
+Enter your stop hook command(s). Type 'DONE' to end.
+
+> bt
+> 
+> disassemble --pc
+> 
+> DONE
+
+### breakpoint 命令
+
+breakpoint 用于设置断点
+
+> (lldb) breakpoint set --name main \\ 给所有方法名为main的设置断点
+> (lldb) breakpoint set --file test.c --line 12  \\ 在指定文件和行数设置断点
+> (lldb) breakpoint set --method main \\给所有c++方法名叫做main的设置断点
+> (lldb) breakpoint set --name "-[NSString stringWithFormat:]" \\给oc方法设置断点
+> (lldb) breakpoint set --selector count 
+> (lldb) breakpoint set --regex regular-expression
+> (lldb) breakpoint list
+> (lldb) breakpoint delete 1
+
+### watchpoint 命令
+
+watchpoint 命令给一个变量设置watch point
+
+> (lldb) watchpoint set variable global_var // 为variable、global_var设置一个断点
+> (lldb) watchpoint set expression -- my_ptr // 为一个地址设置watchpoint
+> 
+> (lldb) watch set var global
+> (lldb) watchpoint modify -c '(global==5)' // 设置watchpoint并添加condition
+> 
+> (lldb) watchpoint list  //列出watchpoint
+> (lldb) watchpoint delete 1 //删除watchpoint
+
+### frame 命令
+
+frame 用来用来和执行的frame有关
+
+> (lldb) frame variable  \\打印当前调用栈的入参 和 本地变量
+> (lldb) frame variable --no-args  \\不带参数
+> (lldb) frame variable bar  \\打印本地变量 bar
+> (lldb) frame variable --format x bar \\以16进制打印
+
+target 全局变量命令
+
+> (lldb) target variable baz //打印全局变量 baz
+> (lldb) target variable  //打印当前文件所有 static 或者 global 变量
+
+### expr 命令
+
+expr 用来动态执行一些表达式
+
+> expr (int) printf ("Print nine: %d.", 4 + 5)
+> expr unsigned int $foo = 5
+> expr -O -- [SomeClass returnAnObject]  \\打印一个oc对象的description
+> expr -d run-target -- [SomeClass returnAnObject] \\打印一个表示式返回数据的动态类型
+
+### thread 命令
+
+thread命令用来和线程有关的操作
+
+1. backtrace
+
+   > (lldb) thread backtrace //打印当前线程调用栈
+   > 
+   > (lldb) thread backtrace -c 5  //打印当前线程调用栈的前5个
+   > 
+   > (lldb) thread backtrace all //打印所有线程调用栈
+
+frame 命令用来和frame相关
+
+1. select
+
+   > (lldb) frame select 12 //通过index选择一个不同的stack frame，在当前的线程
+
+2. info
+
+   > (lldb) frame info //打印当前线程当前frame 的信息
+
+3. up
+
+   > (lldb) up 或者 frame select --relative=1 //打印调用当前frame的上一个frame
+
+4. down
+
+   > (lldb) down 或者 frame select --relatice=-1 //打印调用栈的下一个frame
+
+register 命令操作寄存器
+
+1. read
+
+   > (lldb) register read //打印当前线程的register 信息
+   > 
+   > (lldb) register read --format i //打印信息并格式化为int
+   > 
+   > (lldb) register read --all //打印所有寄存器信息 
+   > 
+   > (lldb) register read rax rsp rbp // 读取当前线程rax\rsp\rbp 的信息
+   > 
+   > (lldb) register read --format binary rax // 将rax寄存器信息以二进制的形式打印
+
+2. write
+
+   > (lldb) register write rax 123 //将一个123 写入到rax 寄存器中去
+   > 
+   > (lldb) register write pc `$pc + 8` // 将pc寄存器向前8 字节
+
+memory 内存指令
+
+1. read 
+
+   > (lldb) memory read --size 4 --format x --count 4 0xbffff3c0 // 从指定地址读取值，size：表示uint32_t ， count： 表示4个数据， format： x
+   > 
+   > (lldb) memory read `argv[0]` //从 表达式 argv[0] 开始读取
+   > 
+   > (lldb) memory read --outfile /tmp/mem.txt --count 512 0xbffff3c0 //从指定地址读取512字节数据并保存到mem.txt 中
+   > 
+   > lldb) memory read --outfile /tmp/mem.bin --binary 0x1000 0x1200 // 读取开始地址和结束地址之间的数据并保存
+
+disassemble 汇编命令
+
+> (lldb) disassemble --frame //反汇编当前调用frame
+> (lldb) disassemble --frame --bytes //
+> (lldb) disassemble --name main  反汇编所以名字为main的方法
+> (lldb) disassemble --start-address 0x1eb8 --end-address 0x1ec3  //反汇编指定地址区间的代码
+> (lldb) disassemble --start-address 0x1eb8 --count 20 // 从指定地址开始，反汇编20个操作
+> disassemble --line // 反汇编当前的这一行
+
+### image 命令
+
+image命令用来操作程序运行时的image
+
+1. list--用来列出所有依赖的library
+
+   > (lldb) image list
+
+2. lookup--通过一个地址在可执行的或者所有library里面查找信息
+
+   > (lldb) image lookup --address 0x12c4
+   > 
+   > (lldb) image lookup --address 0x12c4 a.out //指定特定的文件
+   > 
+   > (lldb) image lookup -r -n NSLog  通过正则表达式在library里面查找方法（-n 表示可以debug  -s 表示不能debug）
+   > 
+   > (lldb) image lookup -type Point //通过一个Type的名字查询信息
+   > 
+   > (lldb) image dump sections a.out
+   > 
+   > (lldb) image dump symtab 
