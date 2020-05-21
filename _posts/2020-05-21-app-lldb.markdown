@@ -45,88 +45,95 @@ options 是 action的修饰语
 重新启动程序，相当于手动点run、command + r
 
 > (lldb) process launch
+
 > (lldb) run
+
 > (lldb) r
 
 attach 到程序 用process id 或者 name
 
 > (lldb) process attach --pid 123
+
 > (lldb) attach -p 123
+
 > (lldb) process attach --name a.out
+
 > (lldb) pro at -n a.out
-> 
+
 > thread step-in
+
 > step
+
 > s
-> 
-> thread step-over
-> next
-> n
+
+> thread step-over  
+> next  
+> n  
 
 Step out of the currently selected frame.
 
-> (lldb) thread step-out
+> (lldb) thread step-out  
 > 
-> (lldb) finish
+> (lldb) finish  
 > 
-> (lldb) target stop-hook add
+> (lldb) target stop-hook add  
 
 Enter your stop hook command(s). Type 'DONE' to end.
 
-> bt
+> bt  
 > 
-> disassemble --pc
+> disassemble --pc  
 > 
-> DONE
+> DONE  
 
 ### breakpoint 命令
 
 breakpoint 用于设置断点
 
-> (lldb) breakpoint set --name main \\ 给所有方法名为main的设置断点
-> (lldb) breakpoint set --file test.c --line 12  \\ 在指定文件和行数设置断点
-> (lldb) breakpoint set --method main \\给所有c++方法名叫做main的设置断点
-> (lldb) breakpoint set --name "-[NSString stringWithFormat:]" \\给oc方法设置断点
-> (lldb) breakpoint set --selector count 
-> (lldb) breakpoint set --regex regular-expression
-> (lldb) breakpoint list
-> (lldb) breakpoint delete 1
+> (lldb) breakpoint set --name main \\ 给所有方法名为main的设置断点  
+> (lldb) breakpoint set --file test.c --line 12  \\ 在指定文件和行数设置断点  
+> (lldb) breakpoint set --method main \\给所有c++方法名叫做main的设置断点  
+> (lldb) breakpoint set --name "-[NSString stringWithFormat:]" \\给oc方法设置断点  
+> (lldb) breakpoint set --selector count   
+> (lldb) breakpoint set --regex regular-expression  
+> (lldb) breakpoint list  
+> (lldb) breakpoint delete 1  
 
 ### watchpoint 命令
 
 watchpoint 命令给一个变量设置watch point
 
-> (lldb) watchpoint set variable global_var // 为variable、global_var设置一个断点
-> (lldb) watchpoint set expression -- my_ptr // 为一个地址设置watchpoint
+> (lldb) watchpoint set variable global_var // 为variable、global_var设置一个断点  
+> (lldb) watchpoint set expression -- my_ptr // 为一个地址设置watchpoint  
 > 
-> (lldb) watch set var global
-> (lldb) watchpoint modify -c '(global==5)' // 设置watchpoint并添加condition
+> (lldb) watch set var global  
+> (lldb) watchpoint modify -c '(global==5)' // 设置watchpoint并添加condition  
 > 
-> (lldb) watchpoint list  //列出watchpoint
-> (lldb) watchpoint delete 1 //删除watchpoint
+> (lldb) watchpoint list  //列出watchpoint  
+> (lldb) watchpoint delete 1 //删除watchpoint  
 
 ### frame 命令
 
 frame 用来用来和执行的frame有关
 
-> (lldb) frame variable  \\打印当前调用栈的入参 和 本地变量
-> (lldb) frame variable --no-args  \\不带参数
-> (lldb) frame variable bar  \\打印本地变量 bar
-> (lldb) frame variable --format x bar \\以16进制打印
+> (lldb) frame variable  \\打印当前调用栈的入参 和 本地变量  
+> (lldb) frame variable --no-args  \\不带参数  
+> (lldb) frame variable bar  \\打印本地变量 bar  
+> (lldb) frame variable --format x bar \\以16进制打印  
 
 target 全局变量命令
 
-> (lldb) target variable baz //打印全局变量 baz
-> (lldb) target variable  //打印当前文件所有 static 或者 global 变量
+> (lldb) target variable baz //打印全局变量 baz  
+> (lldb) target variable  //打印当前文件所有 static 或者 global 变量  
 
 ### expr 命令
 
 expr 用来动态执行一些表达式
 
-> expr (int) printf ("Print nine: %d.", 4 + 5)
-> expr unsigned int $foo = 5
-> expr -O -- [SomeClass returnAnObject]  \\打印一个oc对象的description
-> expr -d run-target -- [SomeClass returnAnObject] \\打印一个表示式返回数据的动态类型
+> expr (int) printf ("Print nine: %d.", 4 + 5)  
+> expr unsigned int $foo = 5  
+> expr -O -- [SomeClass returnAnObject]  \\打印一个oc对象的description  
+> expr -d run-target -- [SomeClass returnAnObject] \\打印一个表示式返回数据的动态类型  
 
 ### thread 命令
 
@@ -134,43 +141,43 @@ thread命令用来和线程有关的操作
 
 1. backtrace
 
-   > (lldb) thread backtrace //打印当前线程调用栈
+   > (lldb) thread backtrace //打印当前线程调用栈  
    > 
-   > (lldb) thread backtrace -c 5  //打印当前线程调用栈的前5个
+   > (lldb) thread backtrace -c 5  //打印当前线程调用栈的前5个  
    > 
-   > (lldb) thread backtrace all //打印所有线程调用栈
+   > (lldb) thread backtrace all //打印所有线程调用栈  
 
 frame 命令用来和frame相关
 
 1. select
 
-   > (lldb) frame select 12 //通过index选择一个不同的stack frame，在当前的线程
+   > (lldb) frame select 12 //通过index选择一个不同的stack frame，在当前的线程  
 
 2. info
 
-   > (lldb) frame info //打印当前线程当前frame 的信息
+   > (lldb) frame info //打印当前线程当前frame 的信息  
 
 3. up
 
-   > (lldb) up 或者 frame select --relative=1 //打印调用当前frame的上一个frame
+   > (lldb) up 或者 frame select --relative=1 //打印调用当前frame的上一个frame  
 
 4. down
 
-   > (lldb) down 或者 frame select --relatice=-1 //打印调用栈的下一个frame
+   > (lldb) down 或者 frame select --relatice=-1 //打印调用栈的下一个frame  
 
 register 命令操作寄存器
 
 1. read
 
-   > (lldb) register read //打印当前线程的register 信息
+   > (lldb) register read //打印当前线程的register 信息  
    > 
-   > (lldb) register read --format i //打印信息并格式化为int
+   > (lldb) register read --format i //打印信息并格式化为int  
    > 
-   > (lldb) register read --all //打印所有寄存器信息 
+   > (lldb) register read --all //打印所有寄存器信息   
    > 
-   > (lldb) register read rax rsp rbp // 读取当前线程rax\rsp\rbp 的信息
+   > (lldb) register read rax rsp rbp // 读取当前线程rax\rsp\rbp 的信息  
    > 
-   > (lldb) register read --format binary rax // 将rax寄存器信息以二进制的形式打印
+   > (lldb) register read --format binary rax // 将rax寄存器信息以二进制的形式打印  
 
 2. write
 
